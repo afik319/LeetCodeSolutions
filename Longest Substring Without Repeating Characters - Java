@@ -1,0 +1,27 @@
+class Solution {
+    public static final int ASCII_COUNT = 128;
+    public static final int NOT_BEEN = -1;
+
+    public static int lengthOfLongestSubstring(String s) {
+        int start = 0;
+        int [] signs = new int[ASCII_COUNT];
+        int temp_count = 0 , max_count = 0;
+        for(int i = 0 ; i < ASCII_COUNT ; i++)
+            signs[i] = NOT_BEEN;
+        for(int i = 0 ; i < s.length() ; i++){
+            char c = s.charAt(i);
+            if(signs[c] != NOT_BEEN){
+                if(signs[c] < start)
+                    temp_count++;
+                else {  
+                    max_count = Math.max(max_count , i - start);
+                    start = signs[c] + 1;
+                    }
+                }
+            else temp_count++;
+            signs[s.charAt(i)] = i;
+        }
+        max_count = Math.max(max_count , s.length() - start);
+        return max_count;
+    }
+}
