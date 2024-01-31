@@ -1,0 +1,32 @@
+#define ASCII_COUNT 128
+#define NOT_BEEN -1
+#define STR_FINISH '\0'
+
+int lengthOfLongestSubstring(char* s) {
+        int start = 0 , str_len = 0;
+    int signs[ASCII_COUNT];
+    int temp_count = 0 , max_count = 0;
+    for(int i = 0 ; s[i] != STR_FINISH ; i++)
+        str_len++;
+    for(int i = 0 ; i < ASCII_COUNT ; i++)
+        signs[i] = NOT_BEEN;
+    for(int i = 0 ; i < str_len ; i++){
+        char c = s[i];
+        if(signs[c] != NOT_BEEN){
+            if(signs[c] < start)
+                temp_count++;
+            else {  
+                max_count = max(max_count , i - start);
+                start = signs[c] + 1;
+                }
+            }
+        else temp_count++;
+        signs[s[i]] = i;
+    }
+    max_count = max(max_count , str_len - start);
+    return max_count;
+}
+
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
