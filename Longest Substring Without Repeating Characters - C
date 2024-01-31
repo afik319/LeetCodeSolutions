@@ -1,3 +1,7 @@
+/**
+  * Given a string s, find the length of the longest substring without repeating characters.
+  */
+
 #define ASCII_COUNT 128
 #define NOT_BEEN -1
 #define STR_FINISH '\0'
