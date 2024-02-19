@@ -1,0 +1,18 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        CountParis(n , 0 , 0 , "" , result);
+        return result;
+    }
+
+    private static void CountParis(int n , int l , int r , String s1 , List<String> result){
+        if(r > l || (l + r == 2*n && r != l))
+            return;
+        if(l + r == 2*n){
+            result.add(s1);
+            return;
+        }
+        CountParis(n , l + 1 , r , s1 + "(" , result);
+        CountParis(n , l , r + 1 , s1 + ")" , result);
+    }
+}
