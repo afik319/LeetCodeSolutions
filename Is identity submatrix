@@ -1,0 +1,28 @@
+/**
+ * Given the square matrix "mat," the number "x," and the number "size," return "true" if the square submatrix of that size, whose up-left corner element "mat[x][x]", is an identity matrix.
+ * The identity matrix is a matrix in which all the elements on the diagonal are equal to 1, and all the rest are equal to 0.
+ * Limitations:
+ *   The method must be recursive. Loops are prohibited.
+ *   Overloading is allowed.
+ *   The matrix is not null or empty.
+ *   changing the matrix and creating new arrays are prohibited.
+ */
+
+public static boolean isIdentity(int [][]mat , int x , int size){
+    return(isIdentity(mat , x , size , x , x));
+    }
+    
+private static boolean isIdentity(int [][]mat , int x , int size , int curr_line_num , int curr_index){
+    if(curr_line_num == x + size)     //finish to check the rellevant matrix
+        return true;
+    if(curr_index == x + size)       //finish to check current line, skip to next line
+        return isIdentity(mat , x , size , curr_line_num + 1 , x);
+    if(curr_line_num == curr_index){                 //diagonal check
+        if(mat[curr_line_num][curr_index] != 1)
+            return false;
+        return isIdentity(mat , x , size , curr_line_num , curr_index + 1);
+        }
+    else if(mat[curr_line_num][curr_index] != 0)     //non_diagonal check
+        return false;
+    return isIdentity(mat , x , size , curr_line_num , curr_index + 1); //finish to check curr_index
+    }
